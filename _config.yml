@@ -20,7 +20,7 @@ heading_anchors: true
 
 aux_links:
   "Edit Content":
-    - "https://github.com/akashgupta200/Akash-Vault/tree/main/docs"
+    - "/Akash-Vault/admin/"
 
 aux_links_new_tab: true
 
@@ -47,6 +47,9 @@ gh_edit_branch: "main"
 gh_edit_view_mode: "edit"
 
 footer_content: "Akash-Vault &mdash; Your personal database administration reference"
+
+include:
+  - admin
 
 exclude:
   - Gemfile
