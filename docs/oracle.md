@@ -2,11 +2,12 @@
 layout: default
 title: Oracle Queries
 nav_order: 2
+has_children: true
 has_toc: true
 ---
 # Oracle Database — Complete DBA Reference
 
-A comprehensive reference guide for Oracle Database administrators, covering connection, monitoring, performance tuning, backup, user management, tablespace management, and essential DBA queries for Akash Gupta
+A comprehensive reference guide for Oracle Database administrators, covering connection, monitoring, performance tuning, backup, user management, tablespace management, and essential DBA queries.
 
 - - -
 

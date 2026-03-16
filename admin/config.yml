@@ -31,25 +31,10 @@ media_folder: "docs/assets/images"
 public_folder: "/Akash-Vault/assets/images"
 
 collections:
-  - name: "main-pages"
-    label: "Main Pages (Oracle / PostgreSQL)"
+  - name: "site-pages"
+    label: "Site Pages"
+    description: "Edit the main site pages (Home, Oracle main, PostgreSQL main)"
     files:
-      - name: "oracle"
-        label: "Oracle Queries"
-        file: "docs/oracle.md"
-        fields:
-          - { label: "Layout", name: "layout", widget: "hidden", default: "default" }
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Sidebar Order", name: "nav_order", widget: "number", default: 2 }
-          - { label: "Content", name: "body", widget: "markdown" }
-      - name: "postgres"
-        label: "PostgreSQL Queries"
-        file: "docs/postgres.md"
-        fields:
-          - { label: "Layout", name: "layout", widget: "hidden", default: "default" }
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Sidebar Order", name: "nav_order", widget: "number", default: 3 }
-          - { label: "Content", name: "body", widget: "markdown" }
       - name: "home"
         label: "Home Page"
         file: "docs/index.md"
@@ -58,15 +43,79 @@ collections:
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Sidebar Order", name: "nav_order", widget: "number", default: 1 }
           - { label: "Content", name: "body", widget: "markdown" }
+      - name: "oracle-main"
+        label: "Oracle — Main Page"
+        file: "docs/oracle.md"
+        fields:
+          - { label: "Layout", name: "layout", widget: "hidden", default: "default" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Sidebar Order", name: "nav_order", widget: "number", default: 2 }
+          - { label: "Content", name: "body", widget: "markdown" }
+      - name: "postgres-main"
+        label: "PostgreSQL — Main Page"
+        file: "docs/postgres.md"
+        fields:
+          - { label: "Layout", name: "layout", widget: "hidden", default: "default" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Sidebar Order", name: "nav_order", widget: "number", default: 3 }
+          - { label: "Content", name: "body", widget: "markdown" }
+
+  - name: "oracle-pages"
+    label: "Oracle (Sub-Pages)"
+    description: "Add new pages under Oracle Queries"
+    folder: "docs/oracle"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "default" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Parent", name: "parent", widget: "hidden", default: "Oracle Queries" }
+      - { label: "Sidebar Order", name: "nav_order", widget: "number" }
+      - { label: "Table of Contents", name: "has_toc", widget: "boolean", default: true }
+      - { label: "Content", name: "body", widget: "markdown" }
+
+  - name: "postgres-pages"
+    label: "PostgreSQL (Sub-Pages)"
+    description: "Add new pages under PostgreSQL Queries"
+    folder: "docs/postgres"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "default" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Parent", name: "parent", widget: "hidden", default: "PostgreSQL Queries" }
+      - { label: "Sidebar Order", name: "nav_order", widget: "number" }
+      - { label: "Table of Contents", name: "has_toc", widget: "boolean", default: true }
+      - { label: "Content", name: "body", widget: "markdown" }
 
   - name: "dba-sheet"
     label: "DBA Reference Sheet"
+    description: "Add or edit DBA Reference Sheet pages"
     folder: "docs/dba-sheet"
     create: true
+    delete: true
     slug: "{{slug}}"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "default" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Parent", name: "parent", widget: "hidden", default: "DBA Reference Sheet" }
       - { label: "Sidebar Order", name: "nav_order", widget: "number" }
+      - { label: "Table of Contents", name: "has_toc", widget: "boolean", default: true }
+      - { label: "Content", name: "body", widget: "markdown" }
+
+  - name: "custom-topics"
+    label: "Custom Topics"
+    description: "Create your own topic pages"
+    folder: "docs/custom"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "default" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Parent", name: "parent", widget: "hidden", default: "Custom Topics" }
+      - { label: "Sidebar Order", name: "nav_order", widget: "number" }
+      - { label: "Table of Contents", name: "has_toc", widget: "boolean", default: true }
       - { label: "Content", name: "body", widget: "markdown" }

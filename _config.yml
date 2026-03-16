@@ -71,7 +71,22 @@ defaults:
     values:
       layout: default
   - scope:
+      path: "docs/oracle/"
+    values:
+      layout: default
+      parent: "Oracle Queries"
+  - scope:
+      path: "docs/postgres/"
+    values:
+      layout: default
+      parent: "PostgreSQL Queries"
+  - scope:
       path: "docs/dba-sheet/"
     values:
       layout: default
       parent: "DBA Reference Sheet"
+  - scope:
+      path: "docs/custom/"
+    values:
+      layout: default
+      parent: "Custom Topics"
