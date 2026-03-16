@@ -21,7 +21,7 @@ Your personal Oracle & PostgreSQL database administration reference — queries,
 
 Complete Oracle DBA reference covering connections, monitoring, sessions, blocking, tuning, backup/RMAN, user management, tablespaces, Data Guard, Data Pump, and more. **48 topics, 3,700+ lines** of battle-tested queries.
 
-[Browse Oracle Queries]({{ site.baseurl }}/docs/oracle.html){: .btn .btn-outline .fs-4 }
+[Browse Oracle Queries]({{ site.baseurl }}/docs/oracle/){: .btn .btn-outline .fs-4 }
 
 ---
 
@@ -30,7 +30,7 @@ Complete Oracle DBA reference covering connections, monitoring, sessions, blocki
 
 Full PostgreSQL DBA guide from architecture to replication — installation, user management, backup/restore, PITR, streaming replication, logical replication, upgrades, pgbench, pgbadger, and version-specific features (13–17). **59 topics, 7,900+ lines**.
 
-[Browse PostgreSQL Queries]({{ site.baseurl }}/docs/postgres.html){: .btn .btn-outline .fs-4 }
+[Browse PostgreSQL Queries]({{ site.baseurl }}/docs/postgres/){: .btn .btn-outline .fs-4 }
 
 ---
 
@@ -39,7 +39,7 @@ Full PostgreSQL DBA guide from architecture to replication — installation, use
 
 **30 topic areas** extracted from the DBA-Sheet-6.1 workbook — OS commands, ASM, RAC, Data Guard, performance tuning, RMAN, locks, tracing, OEM, GoldenGate, security, patching, and more. Each topic is a separate page for quick access.
 
-[Browse DBA Reference Sheet]({{ site.baseurl }}/docs/dba-sheet.html){: .btn .btn-outline .fs-4 }
+[Browse DBA Reference Sheet]({{ site.baseurl }}/docs/dba-sheet/){: .btn .btn-outline .fs-4 }
 
 ---
 
