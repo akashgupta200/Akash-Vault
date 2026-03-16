@@ -40,6 +40,12 @@ callouts:
     title: Note
     color: blue
 
+gh_edit_link: true
+gh_edit_link_text: "Edit this page on GitHub"
+gh_edit_repository: "https://github.com/akashgupta200/Akash-Vault"
+gh_edit_branch: "main"
+gh_edit_view_mode: "edit"
+
 footer_content: "Akash-Vault &mdash; Your personal database administration reference"
 
 include:
