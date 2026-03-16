@@ -82,19 +82,29 @@ hr {
   border-color: #3B4245;
 }
 
-// ── Left sidebar: compact, with room for heading index ──
+// ── Left sidebar: compact, visible scrollbar ──
 
 .side-bar {
   width: 260px !important;
   min-width: 260px !important;
+  max-width: 260px !important;
   font-size: 0.86em;
-  overflow-y: auto;
+  overflow-y: auto !important;
+  overflow-x: hidden;
 }
 
-@media (min-width: 800px) {
-  .main {
-    margin-left: 260px !important;
-  }
+.side-bar::-webkit-scrollbar { width: 6px; }
+.side-bar::-webkit-scrollbar-track { background: #1E2529; }
+.side-bar::-webkit-scrollbar-thumb {
+  background: #3B4245;
+  border-radius: 3px;
+}
+.side-bar::-webkit-scrollbar-thumb:hover { background: #555D67; }
+
+// Firefox scrollbar
+.side-bar {
+  scrollbar-width: thin;
+  scrollbar-color: #3B4245 #1E2529;
 }
 
 .site-title {
@@ -126,7 +136,23 @@ hr {
   }
 }
 
-// ── Main content: use all available width ──
+// ── Main content: fill entire remaining width ──
+// Override .side-bar + .main specificity from theme
+
+@media (min-width: 50rem) {
+  .main {
+    max-width: none !important;
+  }
+  .side-bar + .main {
+    margin-left: 260px !important;
+  }
+}
+
+@media (min-width: 66.5rem) {
+  .side-bar + .main {
+    margin-left: 260px !important;
+  }
+}
 
 .main-content-wrap {
   max-width: none !important;
@@ -136,13 +162,8 @@ hr {
 
 .main-content {
   max-width: none !important;
+  width: 100% !important;
   padding: 2em 3em 2em 2em;
-}
-
-@media (min-width: 800px) {
-  .main {
-    max-width: none !important;
-  }
 }
 
 // ── Tables ──
