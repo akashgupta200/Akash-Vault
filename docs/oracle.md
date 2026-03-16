@@ -4,12 +4,11 @@ title: Oracle Queries
 nav_order: 2
 has_toc: true
 ---
-
 # Oracle Database — Complete DBA Reference
 
 A comprehensive reference guide for Oracle Database administrators, covering connection, monitoring, performance tuning, backup, user management, tablespace management, and essential DBA queries for Akash Gupta
 
----
+- - -
 
 ## 1. ORACLE CONNECTION SQLPLUS COMMAND
 
@@ -19,7 +18,7 @@ Connect to Oracle database using SQL*Plus with a full connection string.
 sqlplus 'username/password@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=your-rds-endpoint.region.rds.amazonaws.com)(PORT=1521))(CONNECT_DATA=(SID=ORCL)))'
 ```
 
----
+- - -
 
 ## 2. ORACLE DATABASE STARTUP PROCESS
 
@@ -31,7 +30,7 @@ startup mount;
 alter database open;
 ```
 
----
+- - -
 
 ## 3. SPFILE AND PFILE
 
@@ -41,7 +40,7 @@ Static and dynamic parameter changes in Oracle. Use `scope` to control where cha
 alter system set process=400 scope=memory, both, spfile;
 ```
 
----
+- - -
 
 ## 4. MONITOR ORACLE DATABASE
 
@@ -107,7 +106,7 @@ set lines 200
 select status, sql_id, username, count(sql_id), count(username), count(status) from gv$session  group by status, sql_id, username;
 ```
 
----
+- - -
 
 ## 5. LONG RUNNING SESSION
 
@@ -217,7 +216,7 @@ group by processing_state;
 
 **Exception where view does not record:** Index long operations (long time)
 
----
+- - -
 
 ## 6. TO SEE QUERY PLAN FOR A SQL ID
 
@@ -225,7 +224,7 @@ group by processing_state;
 select * from table(dbms_xplan.display_cursor('&SQL_ID',null));
 ```
 
----
+- - -
 
 ## 7. DIRECTLY DISPLAY THE PLAN IN SESSION LEVEL
 
@@ -237,7 +236,7 @@ select * from table(dbms_xplan.display_cursor(null,null));
 select /*+parallel(16)*/ name from table;
 ```
 
----
+- - -
 
 ## 8. GATHER STATS
 
@@ -245,7 +244,7 @@ select /*+parallel(16)*/ name from table;
 exec DBMS_STATS.GATHER_TABLE_STATS('KISH','XTB');
 ```
 
----
+- - -
 
 ## 9. KILL SESSION
 
@@ -341,7 +340,7 @@ expdp admin/'o9vC4J97fq$SDWT!a$J7wy1L8LgcFc'@t0151pplat1ceoad_high attach=SYS_EX
 kill_job
 ```
 
----
+- - -
 
 ## 10. TO MAP OS PROCESS WITH DB
 
@@ -352,7 +351,7 @@ select se.sid,se.serial#,se.sql_id,se.machine,se.terminal,se.module,se.action,pr
 inner join v$process pr on (pr.addr = se.paddr) where pr.spid ='984859';
 ```
 
----
+- - -
 
 ## 11. SHELL SCRIPT TO SELECT DATA
 
@@ -372,7 +371,7 @@ EOF
 done
 ```
 
----
+- - -
 
 ## 12. BLOCKING SESSION
 
@@ -612,7 +611,7 @@ SELECT a.sid,a.owner,a.type,s.username,s.program,s.module,s.sql_id,sq.sql_text f
 v$access a,v$session s,v$sql sq where a.sid=s.sid and sq.sql_id = s.sql_id and a.object='CM2_CMI_MATCHES_NPD';
 ```
 
----
+- - -
 
 ## 13. MONITOR IMPORT PROGRESS
 
@@ -663,7 +662,7 @@ FROM v$session_longops sl, v$datapump_job dp
 WHERE sl.opname = dp.job_name;
 ```
 
----
+- - -
 
 ## 14. BRIGHT DBA TUNING
 
@@ -919,7 +918,7 @@ col VALUE_STRING for a50
 SELECT NAME,POSITION,DATATYPE_STRING,VALUE_STRING FROM gv$sql_bind_capture WHERE sql_id='&sql_id';
 ```
 
----
+- - -
 
 ## 15. FRA FULL — Flash Recovery Area
 
@@ -978,7 +977,7 @@ order by 1;
 
 **PROCESS, SESSIONS, TRANSACTIONS:** `sessions= (1.5* processes)+22`, `opt transactions = 1.1*sessions`. Use `desc v$resource_limit` for real-time utilization. To change processes parameter, reboot the database (5-10 min downtime). Use `parallel_max_servers` to limit parallel process.
 
----
+- - -
 
 ## 16. Important Queries
 
@@ -1575,7 +1574,7 @@ order by 4 DESC;
 create tablespace DUMMYWALLET  datafile size 1m autoextend on encryption using 'AES256' default storage (encrypt);
 ```
 
----
+- - -
 
 ## 17. BACKUP JOB
 
@@ -1744,7 +1743,7 @@ run {
 }
 ```
 
----
+- - -
 
 ## 18. FORMATTING IN SQLPLUS
 
@@ -1768,19 +1767,19 @@ Show con_name;
 V$pdbs;
 ```
 
----
+- - -
 
 ## 19. MANAGING INSTANCE
 
 ### Parameter file
 
-- **Server parameter file (SPFILE):** Binary file. Use `alter system` to change parameters. Cannot write manually. `Spfile<SID>.ora`
-- **Parameter file (PFILE):** Key-value pair file. Can write manually. After changing, restart instance to refresh. `init.ora`. Location: `$ORACLE_HOME/dbs`
+* **Server parameter file (SPFILE):** Binary file. Use `alter system` to change parameters. Cannot write manually. `Spfile<SID>.ora`
+* **Parameter file (PFILE):** Key-value pair file. Can write manually. After changing, restart instance to refresh. `init.ora`. Location: `$ORACLE_HOME/dbs`
 
 ### When instance get started
 
-- `Startup;` — Searches for spfile&lt;sid&gt;.ora, then spfile.ora, then init&lt;sid&gt;.ora
-- `Startup pfile=filename;` — If pfile name is not init&lt;sid&gt;.ora
+* `Startup;` — Searches for spfile&lt;sid&gt;.ora, then spfile.ora, then init&lt;sid&gt;.ora
+* `Startup pfile=filename;` — If pfile name is not init&lt;sid&gt;.ora
 
 ### Parameters
 
@@ -1803,10 +1802,10 @@ Show parameter block;
 
 ### Change the parameter
 
-- **MEMORY** — Change happens immediately but is lost after shutdown
-- **SPFILE** — Change visible only after shutdown and restart
-- **BOTH** — Both memory and spfile
-- **DEFERRED** — Change visible only for future sessions
+* **MEMORY** — Change happens immediately but is lost after shutdown
+* **SPFILE** — Change visible only after shutdown and restart
+* **BOTH** — Both memory and spfile
+* **DEFERRED** — Change visible only for future sessions
 
 ```sql
 Alter session set parameter_name='value';
@@ -1834,7 +1833,7 @@ Alter system set parameter=value container= CURRENT | ALL;
 
 If spfile was used to start the database, then `scope=both` is default. If pfile was used, then `scope=memory` is default.
 
----
+- - -
 
 ## 20. ADR (AUTOMATIC DIAGNOSTIC REPOSITORY)
 
@@ -1854,7 +1853,7 @@ show alert
 exit
 ```
 
----
+- - -
 
 ## 21. User Management in Oracle
 
@@ -1986,22 +1985,22 @@ Drop role DEV_ROLE;
 
 ### Data dictionary views
 
-- `session_privs`, `role_sys_privs`, `user_sys_privs`
-- `user_tab_privs_recd`, `user_tab_privs_made`
-- `user_col_privs_recd`, `user_col_privs_made`
-- `user_role_privs`, `dba_role_privs`
+* `session_privs`, `role_sys_privs`, `user_sys_privs`
+* `user_tab_privs_recd`, `user_tab_privs_made`
+* `user_col_privs_recd`, `user_col_privs_made`
+* `user_role_privs`, `dba_role_privs`
 
 ### Some user administrative account
 
-- **SYS** — Super user
-- **SYSTEM** — Other than backup everything
-- **SYSDBA** — Super privilege
-- **SYSBACKUP** — Taking backup
-- **SYSDG** — Dataguard
-- **SYSRAC** — RAC
-- **SYSKM** — TDE
-- **SYSMAN** — OEM administration
-- **SYSASM** — ASM
+* **SYS** — Super user
+* **SYSTEM** — Other than backup everything
+* **SYSDBA** — Super privilege
+* **SYSBACKUP** — Taking backup
+* **SYSDG** — Dataguard
+* **SYSRAC** — RAC
+* **SYSKM** — TDE
+* **SYSMAN** — OEM administration
+* **SYSASM** — ASM
 
 ### Oracle supplied roles
 
@@ -2009,10 +2008,10 @@ DBA, RESOURCE, SELECT_CATALOG_ROLE, SCHEDULER_ADMIN
 
 ### User profile
 
-- **RESOURCE type:** RESOURCE_LIMITS [KERNEL] must be true for IDLE_TIME
-- **PASSWORD:** PASSWORD EXPIRE AND AGING
+* **RESOURCE type:** RESOURCE_LIMITS \[KERNEL] must be true for IDLE_TIME
+* **PASSWORD:** PASSWORD EXPIRE AND AGING
 
----
+- - -
 
 ## 22. TABLESPACE MANAGEMENT
 
@@ -2026,18 +2025,18 @@ DATA_FILES → FILE SYSTEMS (NFS, ASM, NAS)
 
 ### Default tablespaces
 
-- **SYSTEM** — Stores data dictionary
-- **SYSAUX**
-- **UNDO** — Rollback, stores uncommitted changes
-- **TEMP** — Sort and join operations (ORDER BY, GROUP BY, SELECT DISTINCT, UNION, CREATE INDEX)
-- **USERS** — User tables
+* **SYSTEM** — Stores data dictionary
+* **SYSAUX**
+* **UNDO** — Rollback, stores uncommitted changes
+* **TEMP** — Sort and join operations (ORDER BY, GROUP BY, SELECT DISTINCT, UNION, CREATE INDEX)
+* **USERS** — User tables
 
 ### Tablespace creation
 
 Types: PERMANENT, UNDO, TEMP
 
-- **BIGFILE TABLESPACE:** 1 datafile, up to 4 billion blocks
-- **SMALLFILE TABLESPACE:** Up to 1022 datafiles
+* **BIGFILE TABLESPACE:** 1 datafile, up to 4 billion blocks
+* **SMALLFILE TABLESPACE:** Up to 1022 datafiles
 
 ```sql
 create tablespace tablespace_name datafile datafile_name size 10m;
@@ -2096,7 +2095,7 @@ alter tablespace undotbs1 retention guarantee;
 alter tablespace undotbs1 retention noguarantee;
 ```
 
----
+- - -
 
 ## 23. Data Dictionary Views
 
@@ -2109,17 +2108,17 @@ SYS.TAB$;
 
 ### Static views
 
-- **CDB_** — Container database
-- **DBA_** — Entire database (pluggable)
-- **ALL_** — Current user schema + objects user has privileges on
-- **USER_** — Current user schema only
+* **CDB_** — Container database
+* **DBA_** — Entire database (pluggable)
+* **ALL_** — Current user schema + objects user has privileges on
+* **USER_** — Current user schema only
 
 Examples: DBA_TABLES, DBA_EXTENTS, DBA_FREE_SPACE, DBA_VIEWS, DBA_INDEXES, DBA_TABLESPACES, DBA_DATA_FILES, DBA_SEGMENTS
 
 ### Dynamic views
 
-- **V$** — Instance-level
-- **GV$** — Global (RAC)
+* **V$** — Instance-level
+* **GV$** — Global (RAC)
 
 Examples: V$parameter, V$database, V$instance, V$session, V$lock, V$transaction, V$logfile, V$log, V$archived_log
 
@@ -2127,12 +2126,12 @@ Examples: V$parameter, V$database, V$instance, V$session, V$lock, V$transaction,
 
 SESSION_PRIVS, DICTIONARY, DICT_COLUMNS, TABLE_PRIVILEGES
 
----
+- - -
 
 ## 24. UNDO VS REDO
 
-- **UNDO:** Stores uncommitted changes for rollback
-- **REDO:** Stores committed changes for database recovery
+* **UNDO:** Stores uncommitted changes for rollback
+* **REDO:** Stores committed changes for database recovery
 
 ### Local vs shared undo tablespace
 
@@ -2146,7 +2145,7 @@ shutdown immediate;
 startup;
 ```
 
----
+- - -
 
 ## 25. Get DDL
 
@@ -2170,7 +2169,7 @@ SELECT DBMS_METADATA.GET_GRANTED_DDL('ROLE_GRANT','<schema>') from dual;
 SELECT DBMS_METADATA.GET_GRANTED_DDL('OBJECT_GRANT','<schema>') from dual;
 ```
 
----
+- - -
 
 ## 26. Statspack
 
@@ -2210,7 +2209,7 @@ select a.instance_number,to_char(a.snap_time,'dd/mon/yyyy hh24:mi') meas_date, b
  order by a.instance_number,a.snap_time;
 ```
 
----
+- - -
 
 ## 27. Gather table stats
 
@@ -2223,42 +2222,43 @@ sqlplus / as sysdba
 Select * from V$version;
 ```
 
----
+- - -
 
 ## 28. Websites
 
 **Reference:**
-- Migrating Oracle AWS RDS using RMAN Backup: https://www.amazonaws.cn/en/blog-selection/migrate-oracle-database-workloads-from-amazon-rds-for-oracle-to-amazon-rds-custom-for-oracle/
-- AWS RDS Oracle external table: https://www.linkedin.com/pulse/data-pump-external-tables-aws-oracle-rds-sanjay-arya/
-- https://www.ludovicocaldara.net/dba/
-- https://www.mirsayeedhassan.com/
-- https://rupeshanantghubade.blogspot.com/
-- SQL tuning scripts: https://github.com/bobbydurrett/OracleDatabaseTuningSQL
-- https://support.dbagenesis.com/oracle-database/oracle-19c-installation-on-linux
-- https://ahmedfattah.com/?p=1405
-- Rollback a patch: https://dohdatabase.com/2025/01/13/how-to-roll-back-after-patching/
-- New patch: https://mikedietrichde.com/2022/05/17/simple-database-installation-with-applyru-and-applyoneoffs/
-- Create new database: https://paggyru.medium.com/7-steps-to-create-a-new-oracle-database-from-the-command-line-f802938fa1f6
-- Export/import RDS Oracle: https://medium.com/@gupta.megha/export-import-rds-oracle-database-using-oracle-data-pump-53c7d60d074e
-- Export/import to Azure blob: https://database-heartbeat.com/2022/03/03/azure-blob-to-oracle-database/
 
----
+* Migrating Oracle AWS RDS using RMAN Backup: https://www.amazonaws.cn/en/blog-selection/migrate-oracle-database-workloads-from-amazon-rds-for-oracle-to-amazon-rds-custom-for-oracle/
+* AWS RDS Oracle external table: https://www.linkedin.com/pulse/data-pump-external-tables-aws-oracle-rds-sanjay-arya/
+* https://www.ludovicocaldara.net/dba/
+* https://www.mirsayeedhassan.com/
+* https://rupeshanantghubade.blogspot.com/
+* SQL tuning scripts: https://github.com/bobbydurrett/OracleDatabaseTuningSQL
+* https://support.dbagenesis.com/oracle-database/oracle-19c-installation-on-linux
+* https://ahmedfattah.com/?p=1405
+* Rollback a patch: https://dohdatabase.com/2025/01/13/how-to-roll-back-after-patching/
+* New patch: https://mikedietrichde.com/2022/05/17/simple-database-installation-with-applyru-and-applyoneoffs/
+* Create new database: https://paggyru.medium.com/7-steps-to-create-a-new-oracle-database-from-the-command-line-f802938fa1f6
+* Export/import RDS Oracle: https://medium.com/@gupta.megha/export-import-rds-oracle-database-using-oracle-data-pump-53c7d60d074e
+* Export/import to Azure blob: https://database-heartbeat.com/2022/03/03/azure-blob-to-oracle-database/
+
+- - -
 
 ## 29. Performance tuning
 
-- Read "SQL Performance Explained" by Markus Winand: https://use-the-index-luke.com/
-- DevGym: https://devgym.oracle.com/pls/apex/f?p=10001:1061::::::
-- COE: https://heliosguneserol.com/2020/04/02/what-is-coe-sql-and-how-we-can-set-execution-plan-for-any-sql/
-- https://easyoradba.com/2020/09/12/oracle-rds-performance-tuning-queries/
-- https://aws.amazon.com/blogs/database/managing-your-sql-plan-in-oracle-se-with-amazon-rds-for-oracle/
-- https://www.br8dba.com/tag/manually-run-sql-advisor/
-- Non CDB to PDB: https://support.oracle.com/epmos/faces/DocumentDisplay?_afrLoop=103493439082889&parent=EXTERNAL_SEARCH&sourceId=HOWTO&id=2012448.1
+* Read "SQL Performance Explained" by Markus Winand: https://use-the-index-luke.com/
+* DevGym: https://devgym.oracle.com/pls/apex/f?p=10001:1061::::::
+* COE: https://heliosguneserol.com/2020/04/02/what-is-coe-sql-and-how-we-can-set-execution-plan-for-any-sql/
+* https://easyoradba.com/2020/09/12/oracle-rds-performance-tuning-queries/
+* https://aws.amazon.com/blogs/database/managing-your-sql-plan-in-oracle-se-with-amazon-rds-for-oracle/
+* https://www.br8dba.com/tag/manually-run-sql-advisor/
+* Non CDB to PDB: https://support.oracle.com/epmos/faces/DocumentDisplay?_afrLoop=103493439082889&parent=EXTERNAL_SEARCH&sourceId=HOWTO&id=2012448.1
 
 ```sql
 @?/rdbms/admin/sqltrpt.sql
 ```
 
----
+- - -
 
 ## 30. Delete unwanted file from RDS Oracle datapump directory
 
@@ -2267,13 +2267,13 @@ SELECT * FROM TABLE(rdsadmin.rds_file_util.listdir('DATA_PUMP_DIR')) ORDER BY MT
 EXEC UTL_FILE.FREMOVE('DATA_PUMP_DIR','LFR_01.dmp');
 ```
 
----
+- - -
 
 ## 31. Resize undo
 
 Reference: https://db-master.com/oracle/resizing-the-undo-tablespace/
 
----
+- - -
 
 ## 32. Find command
 
@@ -2285,7 +2285,7 @@ find . -mtime 1    # find files modified between 24 and 48 hours ago
 find . -mtime +1   # find files modified more than 48 hours ago
 ```
 
----
+- - -
 
 ## 33. SDIFF TUTORIAL
 
@@ -2298,7 +2298,7 @@ sdiff -s -o outputfilename file1 file2
 sdiff -l -B -I  -s  txt1.sql txt2.sql
 ```
 
----
+- - -
 
 ## 34. OSB
 
@@ -2307,7 +2307,7 @@ sdiff -l -B -I  -s  txt1.sql txt2.sql
 java -jar osbws_install.jar -AWSID YOUR_AWS_ACCESS_KEY_ID -AWSKey YOUR_AWS_SECRET_ACCESS_KEY -walletDir $ORACLE_HOME/dbs/osbws_wallet -libDir $ORACLE_HOME/lib -awsEndPoint s3.us-west-2.amazonaws.com -location us-west-2 -useHttps
 ```
 
----
+- - -
 
 ## 35. Change archivelog dest in prod
 
@@ -2316,7 +2316,7 @@ alter system set log_archive_dest='/opt/archive/archivelogs' scope=both;
 alter system set log_archive_dest='/opt/backup/archivelogs' scope=both;
 ```
 
----
+- - -
 
 ## 36. Fragmentation: re-org
 
@@ -2430,7 +2430,7 @@ AND b.sql_id= c.sql_id
 order by logon_time;
 ```
 
----
+- - -
 
 ## 37. To check dependency of view on tables, functions
 
@@ -2462,13 +2462,13 @@ AND        a.name  = PRIOR a.referenced_name
 AND        a.type  = PRIOR a.referenced_type;
 ```
 
----
+- - -
 
 ## 38. Oracle unused space claim article
 
 https://oracle-base.com/articles/misc/reclaiming-unused-space#setup_test_environment
 
----
+- - -
 
 ## 39. Bash profile content
 
@@ -2485,7 +2485,7 @@ export PATH=$ORACLE_HOME/bin:$PATH
 export CLASSPATH=$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 ```
 
----
+- - -
 
 ## 40. LFR logging check
 
@@ -2495,7 +2495,7 @@ SELECT * FROM lfr.v_lfr_stat   ORDER BY start_date DESC ;
 SELECT * FROM lfr.v_lfr_stat WHERE NAM_PROCEDURE='etl2.sh' ORDER BY start_date DESC FETCH FIRST 50 ROWS only;
 ```
 
----
+- - -
 
 ## 41. AWS RDS datapump files with size
 
@@ -2512,7 +2512,7 @@ WHERE type = 'file' and filename like '%.dmp'
 ORDER BY mtime DESC;
 ```
 
----
+- - -
 
 ## 42. AWS RDS storage query
 
@@ -2585,7 +2585,7 @@ FROM dba_free_space) free
 GROUP BY free.f);
 ```
 
----
+- - -
 
 ## 43. Export directly from AWS RDS Oracle using DBMS datapump
 
@@ -2638,7 +2638,7 @@ WHERE type = 'file' and filename like '%.dmp'
 ORDER BY filename ;
 ```
 
----
+- - -
 
 ## 44. SGA and PGA usage
 
@@ -2672,7 +2672,7 @@ WHERE name IN ('buffer_cache', 'shared_pool', 'large_pool', 'java_pool', 'redo l
 ORDER BY bytes DESC;
 ```
 
----
+- - -
 
 ## 45. Install SQLPLUS/IMPDP/EXPDP utility in a LINUX machine
 
@@ -2694,7 +2694,7 @@ export LD_LIBRARY_PATH=/home/ubuntu/oracle_client/instantclient_21_13:$LD_LIBRAR
 export PATH=/home/ubuntu/oracle_client/instantclient_21_13:$PATH
 ```
 
----
+- - -
 
 ## 46. Daily archivelog generation query
 
@@ -2722,7 +2722,7 @@ FROM
 v$log ) B;
 ```
 
----
+- - -
 
 ## 47. Find child table
 
@@ -2746,7 +2746,7 @@ WHERE
     );
 ```
 
----
+- - -
 
 ## 48. Undo usage
 
@@ -2781,7 +2781,7 @@ where u.segment_name = '_SYSSMU' || t.xidusn || '$' and t.addr = s.taddr
 group by u.tablespace_name, s.username, u.status order by 1,2,3;
 ```
 
----
+- - -
 
 ## Additional queries
 
@@ -2893,7 +2893,11 @@ select /*+ HashJoin(a,b) */ count(*)
 
 ### Statspack websites
 
-- https://www.br8dba.com/statspack/
-- https://www.akadia.com/services/ora_statspack_survival_guide.html
-- https://dbaclass.com/
-- https://oracle-base.com/dba/scripts
+* https://www.br8dba.com/statspack/
+* https://www.akadia.com/services/ora_statspack_survival_guide.html
+* https://dbaclass.com/
+* https://oracle-base.com/dba/scripts
+
+  ```
+  select username from dba_users where oracle_maintained='N';
+  ```
