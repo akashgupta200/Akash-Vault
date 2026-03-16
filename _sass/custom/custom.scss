@@ -33,21 +33,21 @@ td > code {
 
 // Rouge token colors (Notepad++ Obsidian palette)
 .highlight {
-  .c, .c1, .cm, .cs, .cp  { color: #66747B; font-style: italic; } // comments
+  .c, .c1, .cm, .cs, .cp  { color: #66747B; font-style: italic; }
   .k, .kd, .kn, .kp,
-  .kr, .kt, .kc            { color: #93C763; font-weight: 600; }  // keywords
+  .kr, .kt, .kc            { color: #93C763; font-weight: 600; }
   .s, .s1, .s2, .sb,
-  .sc, .sh, .sx, .dl       { color: #EC7600; }                     // strings
+  .sc, .sh, .sx, .dl       { color: #EC7600; }
   .m, .mi, .mf, .mh, .mo,
-  .il                       { color: #FFCD22; }                     // numbers
-  .nb, .bp                  { color: #678CB1; }                     // builtins
-  .nf, .nc                  { color: #678CB1; font-weight: 600; }  // functions / classes
-  .na                       { color: #E8E2B7; }                     // attributes
-  .nv, .vi, .vc, .vg        { color: #A082BD; }                     // variables
-  .o, .ow                   { color: #E8E2B7; }                     // operators
-  .p                         { color: #E0E2E4; }                     // punctuation
-  .n, .no, .ni, .ne, .nn    { color: #E0E2E4; }                     // names
-  .err                       { color: #D25252; }                     // errors
+  .il                       { color: #FFCD22; }
+  .nb, .bp                  { color: #678CB1; }
+  .nf, .nc                  { color: #678CB1; font-weight: 600; }
+  .na                       { color: #E8E2B7; }
+  .nv, .vi, .vc, .vg        { color: #A082BD; }
+  .o, .ow                   { color: #E8E2B7; }
+  .p                         { color: #E0E2E4; }
+  .n, .no, .ni, .ne, .nn    { color: #E0E2E4; }
+  .err                       { color: #D25252; }
   .gd                        { color: #D25252; background: rgba(210,82,82,0.1); }
   .gi                        { color: #93C763; background: rgba(147,199,99,0.1); }
 }
@@ -82,17 +82,18 @@ hr {
   border-color: #3B4245;
 }
 
-// ── Sidebar & navigation (narrower, collapsible) ──
+// ── Left sidebar: compact, with room for heading index ──
 
 .side-bar {
-  width: 220px !important;
-  min-width: 220px !important;
-  font-size: 0.88em;
+  width: 260px !important;
+  min-width: 260px !important;
+  font-size: 0.86em;
+  overflow-y: auto;
 }
 
 @media (min-width: 800px) {
   .main {
-    margin-left: 220px !important;
+    margin-left: 260px !important;
   }
 }
 
@@ -102,8 +103,8 @@ hr {
 }
 
 .nav-list-link {
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 
 .nav-list-link.active {
@@ -125,12 +126,26 @@ hr {
   }
 }
 
-// ── Content area ──
+// ── Main content: use all available width ──
+
+.main-content-wrap {
+  max-width: none !important;
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+}
 
 .main-content {
-  max-width: none;
-  padding-right: 24px;
+  max-width: none !important;
+  padding: 2em 3em 2em 2em;
 }
+
+@media (min-width: 800px) {
+  .main {
+    max-width: none !important;
+  }
+}
+
+// ── Tables ──
 
 table {
   display: block;

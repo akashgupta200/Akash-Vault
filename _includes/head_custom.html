@@ -1,150 +1,113 @@
 <style>
-/* ── Right-side Table of Contents ── */
-.page-toc {
-  position: fixed;
-  top: 70px;
-  right: 16px;
-  width: 220px;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
-  padding: 12px 0 12px 16px;
-  border-left: 2px solid #3B4245;
-  font-size: 0.78em;
-  z-index: 100;
-  display: none;
+/* ── In-sidebar heading index (On This Page) ── */
+#sidebar-toc {
+  border-top: 1px solid #3B4245;
+  margin-top: 12px;
+  padding-top: 10px;
 }
-@media (min-width: 1200px) {
-  .page-toc { display: block; }
-}
-.page-toc-title {
+#sidebar-toc summary {
   font-weight: 700;
   color: #FFCD22;
-  margin-bottom: 8px;
+  font-size: 0.82em;
   text-transform: uppercase;
-  font-size: 0.85em;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  padding: 4px 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-.page-toc a {
+#sidebar-toc summary::-webkit-details-marker { display: none; }
+#sidebar-toc summary::before {
+  content: '\25B6';
+  font-size: 0.6em;
+  transition: transform 0.2s;
+}
+#sidebar-toc[open] summary::before { transform: rotate(90deg); }
+#sidebar-toc .toc-list {
+  max-height: 55vh;
+  overflow-y: auto;
+  padding: 4px 0 0 0;
+  margin: 0;
+}
+#sidebar-toc .toc-list::-webkit-scrollbar { width: 3px; }
+#sidebar-toc .toc-list::-webkit-scrollbar-thumb { background: #3B4245; border-radius: 3px; }
+#sidebar-toc .toc-list a {
   display: block;
-  padding: 3px 0;
+  padding: 2px 8px;
   color: #93C763;
   text-decoration: none;
-  line-height: 1.4;
-  transition: color 0.15s;
+  font-size: 0.82em;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.page-toc a:hover,
-.page-toc a.active {
+#sidebar-toc .toc-list a:hover,
+#sidebar-toc .toc-list a.active {
   color: #FFCD22;
+  background: rgba(255, 205, 34, 0.06);
 }
-.page-toc a.toc-h3 {
-  padding-left: 14px;
-  font-size: 0.92em;
+#sidebar-toc .toc-list a.toc-h3 {
+  padding-left: 20px;
   color: #678CB1;
+  font-size: 0.78em;
 }
-.page-toc a.toc-h3:hover,
-.page-toc a.toc-h3.active {
+#sidebar-toc .toc-list a.toc-h3:hover,
+#sidebar-toc .toc-list a.toc-h3.active {
   color: #FFCD22;
-}
-.page-toc::-webkit-scrollbar { width: 3px; }
-.page-toc::-webkit-scrollbar-thumb { background: #3B4245; border-radius: 3px; }
-
-/* Shrink main content when TOC is visible */
-@media (min-width: 1200px) {
-  .main-content-wrap { margin-right: 250px; }
-}
-
-/* ── Sidebar collapse toggle ── */
-.sidebar-toggle {
-  display: none;
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 1100;
-  background: #1E2529;
-  border: 1px solid #3B4245;
-  color: #93C763;
-  border-radius: 6px;
-  width: 36px;
-  height: 36px;
-  cursor: pointer;
-  font-size: 18px;
-  line-height: 34px;
-  text-align: center;
-  transition: left 0.25s ease;
-}
-@media (min-width: 800px) {
-  .sidebar-toggle { display: block; }
-}
-.sidebar-toggle:hover { background: #293134; color: #FFCD22; }
-
-.side-bar.collapsed { transform: translateX(-100%); }
-.side-bar {
-  transition: transform 0.25s ease, width 0.25s ease;
-  width: 220px !important;
-}
-@media (min-width: 800px) {
-  .side-bar.collapsed + .main { margin-left: 0 !important; }
-  .side-bar.collapsed ~ .sidebar-toggle { left: 10px; }
-  .side-bar:not(.collapsed) ~ .sidebar-toggle { left: 226px; }
 }
 </style>
 
 <script defer>
 document.addEventListener('DOMContentLoaded', function () {
-  // ── Build right-side TOC from h2/h3 headings ──
   var main = document.getElementById('main-content');
   if (!main) return;
 
   var headings = main.querySelectorAll('h2[id], h3[id]');
   if (headings.length < 2) return;
 
-  var toc = document.createElement('nav');
-  toc.className = 'page-toc';
-  toc.setAttribute('aria-label', 'On this page');
+  var siteNav = document.getElementById('site-nav');
+  if (!siteNav) return;
 
-  var title = document.createElement('div');
-  title.className = 'page-toc-title';
-  title.textContent = 'On This Page';
-  toc.appendChild(title);
+  var details = document.createElement('details');
+  details.id = 'sidebar-toc';
+  details.open = true;
+
+  var summary = document.createElement('summary');
+  summary.textContent = 'On This Page';
+  details.appendChild(summary);
+
+  var list = document.createElement('div');
+  list.className = 'toc-list';
 
   headings.forEach(function (h) {
     var a = document.createElement('a');
     a.href = '#' + h.id;
     a.textContent = h.textContent.replace(/^#\s*/, '').replace(/\s*¶$/, '');
     a.className = h.tagName === 'H3' ? 'toc-h3' : 'toc-h2';
-    toc.appendChild(a);
+    list.appendChild(a);
   });
 
-  document.body.appendChild(toc);
+  details.appendChild(list);
+  siteNav.appendChild(details);
 
-  // Scroll-spy: highlight current heading
-  var tocLinks = toc.querySelectorAll('a');
+  // Scroll-spy: highlight current heading in sidebar TOC
+  var tocLinks = list.querySelectorAll('a');
   var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
         tocLinks.forEach(function (l) { l.classList.remove('active'); });
-        var match = toc.querySelector('a[href="#' + entry.target.id + '"]');
-        if (match) match.classList.add('active');
+        var match = list.querySelector('a[href="#' + entry.target.id + '"]');
+        if (match) {
+          match.classList.add('active');
+          match.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
       }
     });
   }, { rootMargin: '-80px 0px -70% 0px', threshold: 0 });
 
   headings.forEach(function (h) { observer.observe(h); });
-
-  // ── Sidebar collapse toggle ──
-  var sidebar = document.querySelector('.side-bar');
-  if (!sidebar) return;
-
-  var btn = document.createElement('button');
-  btn.className = 'sidebar-toggle';
-  btn.innerHTML = '&#9776;';
-  btn.title = 'Toggle sidebar';
-  btn.setAttribute('aria-label', 'Toggle sidebar');
-  document.body.appendChild(btn);
-
-  btn.addEventListener('click', function () {
-    sidebar.classList.toggle('collapsed');
-    btn.innerHTML = sidebar.classList.contains('collapsed') ? '&#9776;' : '&#10005;';
-  });
 });
 </script>
