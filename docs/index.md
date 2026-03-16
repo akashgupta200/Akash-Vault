@@ -6,13 +6,11 @@ description: "DBA Handbook — Your personal Oracle & PostgreSQL reference"
 permalink: /
 ---
 
-# DBA Handbook
+# Akash-Vault
 {: .fs-9 }
 
 Your personal Oracle & PostgreSQL database administration reference — queries, commands, and procedures, all in one place.
 {: .fs-6 .fw-300 }
-
-[Edit Content (Admin Panel)]({{ site.baseurl }}/admin/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 ---
 

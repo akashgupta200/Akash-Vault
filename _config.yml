@@ -1,9 +1,9 @@
-title: DBA Handbook
+title: Akash-Vault
 description: A comprehensive Oracle & PostgreSQL DBA reference — queries, commands, and procedures
-url: ""
+url: "https://akashgupta200.github.io"
 baseurl: "/Akash-Vault"
 
-theme: just-the-docs
+remote_theme: just-the-docs/just-the-docs
 
 color_scheme: dark
 
@@ -17,10 +17,10 @@ search.tokenizer_separator: /[\s/]+/
 heading_anchors: true
 
 aux_links:
-  "Edit on Admin Panel":
-    - "admin/"
+  "Edit Content":
+    - "/Akash-Vault/admin/"
 
-aux_links_new_tab: false
+aux_links_new_tab: true
 
 nav_sort: case_insensitive
 
@@ -38,7 +38,10 @@ callouts:
     title: Note
     color: blue
 
-footer_content: "DBA Handbook &mdash; Your personal database administration reference"
+footer_content: "Akash-Vault &mdash; Your personal database administration reference"
+
+include:
+  - admin
 
 exclude:
   - Gemfile
@@ -46,7 +49,11 @@ exclude:
   - node_modules
   - vendor
   - README.md
+  - SETUP-GUIDE.md
   - "*.sql"
+
+plugins:
+  - jekyll-seo-tag
 
 defaults:
   - scope:
@@ -58,4 +65,3 @@ defaults:
     values:
       layout: default
       parent: "DBA Reference Sheet"
-      grand_parent: ""
