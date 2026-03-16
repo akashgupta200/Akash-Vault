@@ -5,7 +5,9 @@ baseurl: "/Akash-Vault"
 
 remote_theme: just-the-docs/just-the-docs
 
-color_scheme: dark
+color_scheme: custom_dark
+
+permalink: pretty
 
 search_enabled: true
 search.heading_level: 3
@@ -53,7 +55,9 @@ exclude:
   - "*.sql"
 
 plugins:
+  - jekyll-remote-theme
   - jekyll-seo-tag
+  - jekyll-include-cache
 
 defaults:
   - scope:
@@ -61,7 +65,7 @@ defaults:
     values:
       layout: default
   - scope:
-      path: "docs/dba-sheet"
+      path: "docs/dba-sheet/"
     values:
       layout: default
       parent: "DBA Reference Sheet"
