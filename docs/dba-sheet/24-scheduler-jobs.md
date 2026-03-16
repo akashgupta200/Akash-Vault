@@ -1,0 +1,47 @@
+---
+layout: default
+title: "Scheduler Jobs Reference"
+parent: "DBA Reference Sheet"
+nav_order: 24
+---
+
+# Scheduler Jobs Reference
+
+DBMS_SCHEDULER job monitoring, logs, run details, and legacy job queries for Oracle DBAs.
+
+---
+
+## DBMS_SCHEDULER Jobs
+
+### Scheduled Job Run Details
+
+```sql
+select LOG_ID,LOG_DATE,OWNER,JOB_NAME,STATUS,ERROR#,REQ_START_DATE,ACTUAL_START_DATE,RUN_DURATION,SESSION_ID,CPU_USED,ADDITIONAL_INFO from DBA_SCHEDULER_JOB_RUN_DETAILS;
+```
+
+### Scheduled Job Logs
+
+```sql
+select LOG_ID,LOG_DATE,OWNER, JOB_NAME,STATUS,USER_NAME,CLIENT_ID,GLOBAL_UID,ADDITIONAL_INFO from DBA_SCHEDULER_JOB_LOG;
+```
+
+### Scheduled Jobs Overview
+
+```sql
+SELECT OWNER,JOB_NAME,CLIENT_ID, PROGRAM_OWNER, PROGRAM_NAME,SCHEDULE_OWNER,START_DATE, END_DATE,ENABLED,STATE,RUN_COUNT,LAST_START_DATE,LAST_RUN_DURATION,
+NEXT_RUN_DATE, MAX_RUN_DURATION,COMMENTS FROM DBA_SCHEDULER_JOBS;
+```
+
+---
+
+## Legacy Jobs (DBMS_JOB)
+
+### DBA Jobs (Legacy)
+
+```sql
+SELECT LOG_USER,SCHEMA_USER,LAST_DATE, LAST_SEC,THIS_DATE,THIS_SEC, NEXT_DATE, NEXT_SEC,TOTAL_TIME,BROKEN,INTERVAL,FAILURES,WHAT,INSTANCE FROM DBA_JOBS;
+```
+
+---
+
+[Back to Main Index](README.md)

@@ -1,0 +1,53 @@
+backend:
+  name: github
+  repo: akashgupta200/Akash-Vault
+  branch: main
+  auth_type: pkce
+  app_id: YOUR_GITHUB_OAUTH_CLIENT_ID
+
+media_folder: "docs/assets/images"
+public_folder: "/Akash-Vault/assets/images"
+
+site_url: https://akashgupta200.github.io/Akash-Vault
+display_url: https://akashgupta200.github.io/Akash-Vault
+
+collections:
+  - name: "main-pages"
+    label: "Main Pages (Oracle / PostgreSQL)"
+    files:
+      - name: "oracle"
+        label: "Oracle Queries"
+        file: "docs/oracle.md"
+        fields:
+          - { label: "Layout", name: "layout", widget: "hidden", default: "default" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Sidebar Order", name: "nav_order", widget: "number", default: 2 }
+          - { label: "Content", name: "body", widget: "markdown" }
+      - name: "postgres"
+        label: "PostgreSQL Queries"
+        file: "docs/postgres.md"
+        fields:
+          - { label: "Layout", name: "layout", widget: "hidden", default: "default" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Sidebar Order", name: "nav_order", widget: "number", default: 3 }
+          - { label: "Content", name: "body", widget: "markdown" }
+      - name: "home"
+        label: "Home Page"
+        file: "docs/index.md"
+        fields:
+          - { label: "Layout", name: "layout", widget: "hidden", default: "default" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Sidebar Order", name: "nav_order", widget: "number", default: 1 }
+          - { label: "Content", name: "body", widget: "markdown" }
+
+  - name: "dba-sheet"
+    label: "DBA Reference Sheet"
+    folder: "docs/dba-sheet"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "default" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Parent", name: "parent", widget: "hidden", default: "DBA Reference Sheet" }
+      - { label: "Sidebar Order", name: "nav_order", widget: "number" }
+      - { label: "Content", name: "body", widget: "markdown" }
