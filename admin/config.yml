@@ -3,7 +3,7 @@ backend:
   repo: akashgupta200/Akash-Vault
   branch: main
   auth_type: pkce
-  app_id: YOUR_GITHUB_OAUTH_CLIENT_ID
+  app_id: Ov23li9cM6RN1DP1cYbQ
 
 media_folder: "docs/assets/images"
 public_folder: "/Akash-Vault/assets/images"
