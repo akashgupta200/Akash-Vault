@@ -13435,8 +13435,10 @@ echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" 
 
 ```bash
 sudo apt update
+```
 
 # Step 6: Install client tools only (no database server)
+```bash
 sudo apt install postgresql-client-15 -y
 
 ```
@@ -13456,5 +13458,4 @@ akashgupta@A-GM0ND3BT:~$ which psql
 akashgupta@A-GM0ND3BT:~$ which pg_dump
 
 /usr/bin/pg_dump
-
 
